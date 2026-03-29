@@ -2,14 +2,14 @@ output "vpc_id" {
   value = module.vpc.vpc_id_output
 }
 
-output "public_id" {
+output "public_subnet_ids_ids" {
   value = module.vpc.public_subnets
 }
 
-output "private_id" {
+output "private_subnet_ids" {
   value = module.vpc.private_subnets
 }
 
-output "database_id" {
+output "database_subnet_ids" {
   value = module.vpc.database_subnets
 }

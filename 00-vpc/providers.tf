@@ -5,6 +5,14 @@ terraform {
       version = "~> 6.0"
     }
   }
+
+    backend "s3" {
+    bucket  = "remote-state-roboshop-infra-dev" # Replace with your unique bucket name
+    key     = "roboshop-dev-vpc"
+    region  = "us-east-1"
+    encrypt = true
+    use_lockfile   = true
+  }
 }
 
 # Configure the AWS Provider
