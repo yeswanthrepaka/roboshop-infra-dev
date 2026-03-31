@@ -1,3 +1,3 @@
-#bin/bash!
+#!/bin/bash
 
 dnf install ansible -y
