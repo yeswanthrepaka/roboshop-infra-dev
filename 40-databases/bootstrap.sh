@@ -7,4 +7,4 @@ cd /home/ec2-user
 git clone https://github.com/yeswanthrepaka/ansible-roles-roboshop-tf.git
 
 cd ansible-roles-roboshop-tf
-ansible-playbook -e component=$component roboshop.sh
+ansible-playbook -e component=$component roboshop.yaml
