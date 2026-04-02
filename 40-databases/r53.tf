@@ -16,3 +16,20 @@ resource "aws_route53_record" "redis" {
   allow_overwrite = true
 }
 
+resource "aws_route53_record" "rabbitmq" {
+  zone_id = local.zone_id
+  name    = "rabbitmq-${var.env}.${local.domain_name}"
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.rabbitmq.private_ip]
+  allow_overwrite = true
+}
+
+resource "aws_route53_record" "mysql" {
+  zone_id = local.zone_id
+  name    = "mysql-${var.env}.${local.domain_name}"
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.mysql.private_ip]
+  allow_overwrite = true
+}
