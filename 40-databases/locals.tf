@@ -10,4 +10,6 @@ locals {
     Environment = var.env
     Terraform = "true"
   }
+  zone_id = var.zone_id
+  domain_name = var.domain_name
 }
