@@ -43,7 +43,7 @@ resource "aws_instance" "redis" {
   ami           = local.ami_id
   instance_type = "t3.micro"
   subnet_id = local.database_subnet_id
-  vpc_security_group_ids = [ local.redis_sd_id ]
+  vpc_security_group_ids = [ local.redis_sg_id ]
 
   tags = merge(
     {

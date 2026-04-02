@@ -27,13 +27,13 @@ data "aws_ssm_parameter" "database_subnet_ids" {
 }
 
 data "aws_ssm_parameter" "redis" {
-  name = "/${var.project}/${var.env}/redis_sd_id"
+  name = "/${var.project}/${var.env}/redis_sg_id"
 }
 
 data "aws_ssm_parameter" "mysql" {
-  name = "/${var.project}/${var.env}/mysql_sd_id"
+  name = "/${var.project}/${var.env}/mysql_sg_id"
 }
 
 data "aws_ssm_parameter" "rabbitmq" {
-  name = "/${var.project}/${var.env}/rabbitmq_sd_id"
+  name = "/${var.project}/${var.env}/rabbitmq_sg_id"
 }
