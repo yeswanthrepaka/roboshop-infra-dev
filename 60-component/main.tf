@@ -170,7 +170,7 @@ resource "aws_autoscaling_policy" "example" {
 }
 
 resource "aws_lb_listener_rule" "main" {
-  listener_arn = local.backend_alb_arn
+  listener_arn = local.backend_alb_listener_arn
   priority     = 10
 
   action {
@@ -182,5 +182,17 @@ resource "aws_lb_listener_rule" "main" {
     host_header {
       values = ["catalogue.backend-alb-${var.env}.${var.domain_name}"]
     }
+  }
+}
+
+resource "terraform_data" "main" {
+  triggers_replace = [
+    aws_instance.main.id
+  ]
+  depends_on = [aws_autoscaling_policy.main]
+  
+  # it executes in bastion
+  provisioner "local-exec" {
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.main.id} "
   }
 }
