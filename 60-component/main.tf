@@ -73,8 +73,7 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_launch_template" "main" {
-  name = "${var.project}-${var.env}-catalogue"
-
+  name = "${var.project}-${var.env}-catalogue-v3"
   image_id = aws_ami_from_instance.main.id
   instance_type = "t3.micro"
   instance_initiated_shutdown_behavior = "terminate"
@@ -106,7 +105,7 @@ resource "aws_launch_template" "main" {
     tags = merge(
       local.common_tags, 
       {
-        Name = "${var.project}-${var.env}-catalogue"
+        Name = "${var.project}-${var.env}-catalogue-v3"
       }
     )
 }
