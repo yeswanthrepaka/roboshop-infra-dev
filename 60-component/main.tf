@@ -124,7 +124,7 @@ resource "aws_autoscaling_group" "main" {
     version = "$Latest"
   }
 
-  vpc_zone_identifier = local.private_subnet_id
+  vpc_zone_identifier = [ local.private_subnet_id ]
   target_group_arns = [ aws_lb_target_group.main.arn ]
 
   instance_refresh {
