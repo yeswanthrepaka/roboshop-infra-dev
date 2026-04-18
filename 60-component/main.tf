@@ -109,3 +109,62 @@ resource "aws_launch_template" "main" {
       }
     )
 }
+
+resource "aws_autoscaling_group" "main" {
+  name                      = "${var.project}-${var.env}-catalogue"
+  max_size                  = 10
+  min_size                  = 1
+  health_check_grace_period = 120
+  health_check_type         = "ELB"
+  desired_capacity          = 1
+  force_delete              = false
+
+  launch_template {
+    id      = aws_launch_template.main.id
+    version = "$Latest"
+  }
+
+  vpc_zone_identifier = local.private_subnet_id
+  target_group_arns = [ aws_lb_target_group.main.arn ]
+
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50
+    }
+    triggers = ["launch_template"]
+  }
+
+  dynamic "tag" {
+    for_each = merge(
+        {
+            Name = "${var.project}-${var.env}-catalogue"
+        },
+        local.common_tags
+    )
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
+
+  # with in 15min autoscaling should be successful
+  timeouts {
+    delete = "15m"
+  }
+}
+
+resource "aws_autoscaling_policy" "example" {
+  autoscaling_group_name = aws_autoscaling_group.main.name
+  name                   = "${var.project}-${var.env}-catalogue"
+  policy_type            = "TargetTrackingScaling"
+  estimated_instance_warmup = 120
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 70.0
+  }
+}
