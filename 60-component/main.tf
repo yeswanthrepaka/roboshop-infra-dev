@@ -155,7 +155,7 @@ resource "aws_autoscaling_group" "main" {
   }
 }
 
-resource "aws_autoscaling_policy" "example" {
+resource "aws_autoscaling_policy" "main" {
   autoscaling_group_name = aws_autoscaling_group.main.name
   name                   = "${var.project}-${var.env}-catalogue"
   policy_type            = "TargetTrackingScaling"
