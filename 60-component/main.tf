@@ -180,7 +180,7 @@ resource "aws_lb_listener_rule" "main" {
 
   condition {
     host_header {
-      values = ["my-service.*.terraform.io"]
+      values = ["catalogue.backend-alb-${var.env}.${var.domain_name}"]
     }
   }
 }
