@@ -168,3 +168,19 @@ resource "aws_autoscaling_policy" "example" {
     target_value = 70.0
   }
 }
+
+resource "aws_lb_listener_rule" "main" {
+  listener_arn = local.backend_alb_arn
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.main.arn
+  }
+
+  condition {
+    host_header {
+      values = ["my-service.*.terraform.io"]
+    }
+  }
+}

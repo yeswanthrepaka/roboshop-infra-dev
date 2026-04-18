@@ -29,3 +29,7 @@ data "aws_ssm_parameter" "private_subnet_ids" {
 data "aws_ssm_parameter" "vpc_id" {
   name = "/${var.project}/${var.env}/vpc_id"
 }
+
+data "aws_ssm_parameter" "backend_alb_arn" {
+  name = "/${var.project}/${var.env}/backend_alb_arn"
+}
