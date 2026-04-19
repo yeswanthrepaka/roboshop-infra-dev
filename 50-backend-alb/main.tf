@@ -1,4 +1,4 @@
-resource "aws_lb" "backend-alb" {
+resource "aws_lb" "backend_alb" {
   name               = "${var.project}-${var.env}"
   internal           = true
   load_balancer_type = "application"
@@ -17,7 +17,7 @@ resource "aws_lb" "backend-alb" {
 
 
 resource "aws_lb_listener" "backend_alb" {
-  load_balancer_arn = aws_lb.backend-alb.arn
+  load_balancer_arn = aws_lb.backend_alb.arn
   port              = "80"
   protocol          = "HTTP"
 
