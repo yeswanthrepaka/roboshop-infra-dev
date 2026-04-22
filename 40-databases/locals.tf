@@ -12,4 +12,10 @@ locals {
   }
   zone_id = var.zone_id
   domain_name = var.domain_name
+  mysql_role_name = join("-", [
+            for name in ["${var.project}","${var.env}", "mysql"] : title(name)
+        ])
+  mysql_policy_name = join("", [
+            for name in ["${var.project}","${var.env}", "mysql"] : title(name)
+        ])
 }
