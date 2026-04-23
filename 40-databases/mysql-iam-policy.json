@@ -5,18 +5,12 @@
             "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "ssm:GetParameter",
-            "Resource": "arn:aws:ssm:us-east-1:160885265516:parameter/roboshop/mysql/rootpassword"
+            "Resource": "arn:aws:ssm:us-east-1:274024183460:parameter/roboshop/mysql/rootpassword"
         },
         {
             "Sid": "VisualEditor1",
             "Effect": "Allow",
             "Action": "ssm:DescribeParameters",
-            "Resource": "*"
-        },
-        {
-            "Sid": "AllowKMSDecrypt",
-            "Effect": "Allow",
-            "Action": "kms:Decrypt",
             "Resource": "*"
         }
     ]
